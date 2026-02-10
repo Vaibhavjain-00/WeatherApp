@@ -17,10 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // server/database is always in another continent
 
     try {
+      getWeatherBtn.textContent = "Searching...";
+      getWeatherBtn.disabled=true;
       const weatherData = await fetchWeatherData(city);
+      
       displayWeatherData(weatherData);
     } catch (error) {
       showError();
+    }
+    finally{
+      getWeatherBtn.textContent="Get Weather";
+       getWeatherBtn.disabled=false;
     }
   });
 
@@ -52,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showError() {
-    weatherInfo.classList.remove("hidden");
-    errorMessage.classList.add("hidden");
+    weatherInfo.classList.add("hidden");
+    errorMessage.classList.remove("hidden");
   }
 });
